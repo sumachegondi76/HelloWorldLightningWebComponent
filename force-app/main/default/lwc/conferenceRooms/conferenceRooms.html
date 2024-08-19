@@ -1,0 +1,113 @@
+<template>
+  <lightning-card>
+    <h1 class="card-title">Select Conference Room and TimeSlot</h1>
+
+    <template if:true={error}>
+      <div class="error-message">{error}</div>
+    </template>
+    <template if:true={showSecondPage}>
+      <template if:true={conferenceRooms.length}>
+        <div class="slds-m-bottom_medium slds-text-align_right custom-text">
+          <div>Booking Date: {bookingDate}</div>
+          <div>Selected Floor: {floorName}</div>
+        </div>
+
+        <div class="room-container">
+          <template for:each={conferenceRooms} for:item="room">
+            <div key={room.Id}>
+              <div
+                class="room-tile"
+                data-room-id={room.Id}
+                data-room-name={room.Name}
+                onclick={handleRoomClick}
+              >
+                <div class="room-image-container">
+                  <img
+                    src={room.RoomImageUrl}
+                    alt={room.Name}
+                    class="room-image"
+                  />
+                </div>
+                <div class="room-label">{room.Name}</div>
+              </div>
+              <template if:true={room.TimeSlots}>
+                <div class="timeslot-container" data-room-id={room.Id}>
+                  <template for:each={room.TimeSlots} for:item="slot">
+                    <div
+                      key={slot.Id}
+                      class="timeslot-tile"
+                      data-room-id={room.Id}
+                      data-timeslot-id={slot.Id}
+                      data-timeslot={slot.slot}
+                      onclick={handleTimeSlotClick}
+                    >
+                      {slot.slot}
+                      <!-- <template if:true={slot.booked}>
+                        <span> (Booked)</span>
+                      </template> -->
+                    </div>
+                  </template>
+                </div>
+              </template>
+            </div>
+          </template>
+        </div>
+      </template>
+      <!-- Legend for seat statuses -->
+      <lightning-layout>
+        <lightning-layout-item
+          class="slds-align_absolute-center"
+          padding="around-small"
+          size="3"
+        >
+          <button name="Available" class={seatAvailableClass}><b>A</b></button>
+          &nbsp;- AVAILABLE
+        </lightning-layout-item>
+        <lightning-layout-item
+          class="slds-align_absolute-center"
+          padding="around-small"
+          size="3"
+        >
+          <button name="Selected" class={seatSelectedClass}>S</button>
+          &nbsp;- SELECTED
+        </lightning-layout-item>
+        <lightning-layout-item
+          class="slds-align_absolute-center"
+          padding="around-small"
+          size="3"
+        >
+          <button name="Booked" class={seatBookedClass}>B</button>
+          &nbsp;- BOOKED
+        </lightning-layout-item>
+      </lightning-layout>
+      <!-- Navigation Buttons -->
+      <lightning-layout-item
+        size="12"
+        padding="around-small"
+        class="slds-align_absolute-center"
+      >
+        <!-- Back Button -->
+        <lightning-button
+          icon-name="utility:chevronleft"
+          label="Back"
+          variant="brand-outline"
+          onclick={handlePreviousPage2}
+        >
+        </lightning-button>
+        <!-- Save Button -->
+        <!-- <template if:true={showSelectBookingButton}> -->
+        <lightning-button
+          icon-position="right"
+          icon-name="utility:chevronright"
+          variant="brand-outline"
+          label="Save"
+          title="Save"
+          onclick={handleSelectBookingForm}
+          disabled={isSaveButtonDisabled}
+        >
+        </lightning-button>
+        <!-- </template> -->
+      </lightning-layout-item>
+    </template>
+  </lightning-card>
+</template>

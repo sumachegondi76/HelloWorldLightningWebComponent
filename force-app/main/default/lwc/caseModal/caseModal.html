@@ -1,0 +1,44 @@
+<template>
+    <template if:true={isModalVisible}>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+        <div class="modal-container">
+            <div class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__header">
+                    <h2 class="slds-text-heading_medium">Case Details</h2>
+                </div>
+                <div class="slds-modal__content slds-p-around_medium">
+                    <div>
+                        <lightning-input label="Case ID" value={selectedRecord.caseId} disabled></lightning-input>
+                    </div>
+                    <div>
+                        <lightning-input label="Contact Name" value={selectedRecord.contactName} disabled={isEditMode}></lightning-input>
+                    </div>
+                    <!-- Add more fields for viewing details -->
+
+                    <!-- Editable fields -->
+                    <template if:true={isEditMode}>
+                        <!-- Add editable fields here -->
+                        <!-- <lightning-input label="Field Label" value={selectedRecord.fieldName} onchange={handleFieldChange}></lightning-input> -->
+                    </template>
+
+                    <!-- Edit button -->
+                    <template if:false={isEditMode}>
+                        <lightning-button label="Edit" variant="brand" onclick={handleEditClick}></lightning-button>
+                    </template>
+
+                    <!-- Save and Cancel buttons for editing mode -->
+                    <template if:true={isEditMode}>
+                        <!-- Add editable fields here -->
+                        <!-- <lightning-input label="Field Label" value={selectedRecord.fieldName} onchange={handleFieldChange}></lightning-input> -->
+                        <lightning-button label="Save" variant="brand" onclick={handleSaveClick}></lightning-button>
+                        <lightning-button label="Cancel" variant="neutral" onclick={handleCancelClick}></lightning-button>
+                    </template>
+
+                </div>
+                <div class="slds-modal__footer">
+                    <lightning-button label="Close" variant="neutral" onclick={handleModalClose}></lightning-button>
+                </div>
+            </div>
+        </div>
+    </template>
+</template>

@@ -1,0 +1,39 @@
+<template>
+  <lightning-card>
+    <lightning-spinner
+      class="slds-is-fixed"
+      variant="brand"
+      alternative-text="Please wait while loading"
+      if:true={showSpinner}
+    ></lightning-spinner>
+    <c-conf-booking></c-conf-booking>
+
+    <!-- Lightning progress indicator -->
+    <lightning-layout multiple-rows="true">
+      <lightning-layout-item size="12" padding="around-small">
+        <lightning-progress-indicator
+          current-step={currentStep}
+          type="path"
+          variant="base"
+        >
+          <!-- Progress steps -->
+          <template for:each={steps} for:item="step">
+            <lightning-progress-step
+              label={step.label}
+              value={step.value}
+              key={step.value}
+            ></lightning-progress-step>
+          </template>
+        </lightning-progress-indicator>
+      </lightning-layout-item>
+    </lightning-layout>
+
+    <lightning-layout-item size="12" padding="around-small">
+      <lightning-input
+        type="date"
+        label="Select Date"
+        onchange={handleDateChange}
+      ></lightning-input>
+    </lightning-layout-item>
+  </lightning-card>
+</template>

@@ -1,0 +1,137 @@
+.forms-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+  margin-top: -30px;
+}
+.login-form-container {
+  margin-top: -40px; /* Move the login form specifically upwards */
+}
+.form-container {
+  width: 100%;
+  max-width: 400px;
+  padding: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background-color: white;
+  margin: 5px;
+  border: 1px solid #ccc;
+  text-align: center;
+}
+/* .form-container h2 {
+  margin-bottom: 20px;
+} */
+.center-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.centered-input {
+  width: 100%;
+  max-width: 300px;
+}
+
+.password-container {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 20px;
+  height: 50px;
+}
+.password-container1 {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+  margin-bottom: 20px;
+  height: 50px;
+}
+.eye-icon {
+  position: absolute;
+  top: 85%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #0070d2;
+}
+.lightning-input input {
+  height: 100%; /* Ensure the input field takes full height */
+  box-sizing: border-box; /* Include padding and border in height/width calculations */
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.photo-container {
+  position: relative;
+  display: inline-block;
+  text-align: center;
+  cursor: pointer;
+  overflow: hidden;
+  max-width: 100%;
+  position: absolute;
+  top: 500%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.photo-container img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: opacity 0.3s ease;
+}
+
+.hover-message {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.photo-container:hover img {
+  opacity: 0.7;
+}
+
+.photo-container:hover .hover-message {
+  display: block;
+  opacity: 1;
+}
+.card-title {
+  text-align: center;
+  font-size: 24px; /* Adjust size as needed */
+  font-weight: bold;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+.error-text {
+  color: red;
+}
+
+.success-text {
+  color: green;
+}
+.password-message p {
+  margin-top: 10px;
+  font-size: 14px;
+}
+.form-title {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.photo-title {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}

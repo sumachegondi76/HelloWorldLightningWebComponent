@@ -1,0 +1,14 @@
+<!--This is used for the personal Account Datatable  -->
+<template>
+    
+    <lightning-datatable
+    data={personalAccounts}
+    columns={lstcolumns}
+    key-field="Id"
+    onrowselection={handleRowSelection}>
+    
+</lightning-datatable>
+<template if:true={selectedAccountId}>
+    <c-detail-screen-sponcer-rel-pacc account-id={selectedAccountId}></c-detail-screen-sponcer-rel-pacc>
+</template>
+</template>

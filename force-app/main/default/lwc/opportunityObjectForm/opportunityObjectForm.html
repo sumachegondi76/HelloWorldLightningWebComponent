@@ -1,0 +1,53 @@
+
+<template>
+    <lightning-card title="Create Custom Object">
+        <div class="slds-p-around_medium">
+          
+            <lightning-record-edit-form
+                object-api-name="CustomObject__c"
+                onsuccess={handleSuccess}
+                onerror={handleError}
+            >
+               
+                <div class="slds-grid slds-gutters">
+                    <div class="slds-col">
+                        <lightning-input-field
+                            field-name="Name"
+                            value={name}
+                            onchange={handleFieldChange}
+                        ></lightning-input-field>
+                    </div>
+                </div>
+
+                <div class="slds-grid slds-gutters">
+                    <div class="slds-col">
+                        <lightning-input-field
+                            field-name="Field1__c"
+                            value={customObjectField1}
+                            onchange={handleFieldChange}
+                        ></lightning-input-field>
+                    </div>
+                </div>
+
+        
+                <div class="slds-grid slds-gutters">
+                    <div class="slds-col">
+                        <lightning-input-field
+                            field-name="Opportunity__c"
+                            value={recordId}
+                        ></lightning-input-field>
+                    </div>
+                </div>
+
+             
+                <div class="slds-m-top_medium">
+                    <lightning-button
+                        type="submit"
+                        label="Save"
+                        title="Save"
+                    ></lightning-button>
+                </div>
+            </lightning-record-edit-form>
+        </div>
+    </lightning-card>
+</template>

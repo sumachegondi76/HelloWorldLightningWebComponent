@@ -1,0 +1,18 @@
+<template>
+    <div class="container">
+        <div class="language-dropdown">
+            <lightning-combobox
+                label="Select Language"
+                options={languageOptions}
+                value={selectedLanguage}
+                onchange={handleLanguageChange}
+            ></lightning-combobox>
+        </div>
+        <textarea class="code-input" onchange={handleCodeChange}></textarea>
+        <lightning-button label="Run Code" variant="brand" onclick={runCode}></lightning-button>
+        <div class="code-output">
+            <strong>Output:</strong>
+            <div>{formattedCode}</div>
+        </div>
+    </div>
+</template>

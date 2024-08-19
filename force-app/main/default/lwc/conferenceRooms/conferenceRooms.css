@@ -1,0 +1,153 @@
+:host {
+  display: block; /* Ensure LWC's scoped styles */
+}
+.card-title {
+  text-align: center;
+  font-size: 24px; /* Adjust size as needed */
+  font-weight: bold;
+  margin-top: 0;
+}
+.room-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 2rem;
+}
+.selected-floor {
+  background-color: green;
+  color: white;
+}
+
+.room-tile {
+  border: 1px solid #d8dde6;
+  padding: 1rem;
+  margin: 0.5rem;
+  cursor: pointer;
+  width: 500px; /* Increase the width to accommodate time slots */
+  text-align: center;
+  position: relative;
+}
+
+.selected-room {
+  background-color: #4caf50; /* Green color for selected room */
+  color: white;
+}
+
+.timeslot-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.timeslot-tile {
+  border: 1px solid #d8dde6;
+  padding: 1rem;
+  margin: 0.5rem;
+  cursor: pointer;
+  width: 150px; /* Adjust the width for time slots */
+  text-align: center;
+  background-color: #f4f6f9;
+  transition: background-color 0.2s ease;
+}
+
+.timeslot-tile.booked {
+  background-color: #f44336; /* Red color for booked time slot */
+  color: white;
+  cursor: not-allowed;
+}
+
+.timeslot-tile.selected-timeslot {
+  background-color: #4caf50; /* Green color for selected time slot */
+  color: white;
+}
+
+.error-message {
+  color: red;
+  text-align: center;
+}
+
+.no-rooms-message {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.success-message {
+  color: green;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.timeslot-tile.disabled {
+  cursor: not-allowed; /* Set cursor to not-allowed when disabled */
+  opacity: 0.7; /* Optionally reduce opacity for visual indication */
+}
+.timeslot-tile.clickable {
+  cursor: pointer; /* Set cursor back to pointer for non-booked time slots */
+}
+.seatButtonAvailableStyle {
+  width: 10px;
+  color: #00008b;
+  border-color: #00008b;
+}
+.seatButtonSelectedStyle {
+  width: 10px;
+  background-color: green;
+  color: white;
+}
+.seatButtonBookedStyle {
+  width: 10px;
+  background-color: red;
+  color: white;
+}
+.all-booked {
+  background-color: red;
+  color: white;
+  cursor: not-allowed;
+}
+.floor-all-booked {
+  background-color: red;
+}
+.custom-text {
+  font-weight: bold;
+  font-size: 1.25rem; /* Adjust the size as needed */
+  padding-right: 20px; /* Adjust this value to fine-tune the alignment */
+}
+.room-image-container {
+  width: 100%;
+  height: 150px; /* Adjust height as per your design */
+  overflow: hidden;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  position: relative;
+  transition: transform 0.3s ease;
+}
+.room-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.room-label {
+  margin-top: 5px;
+  text-align: center;
+}
+/* .selected-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Align items to the left */
+/* margin-bottom: 1rem; /* Adjust margin as needed */
+/* }
+
+.selected-floor,
+.selected-date {
+  font-size: 1.25rem; /* Increase the font size */
+/* font-weight: bold; /* Make the text bold */
+/* margin-bottom: 0.5rem; /* Adjust spacing between lines */
+/* } */

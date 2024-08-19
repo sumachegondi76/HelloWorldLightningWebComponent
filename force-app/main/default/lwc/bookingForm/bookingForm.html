@@ -1,0 +1,107 @@
+<template>
+  <lightning-card>
+    <div class="title-container">
+      <h1 class="card-title">Complete your Booking</h1>
+    </div>
+    <template if:true={showThirdPage}>
+      <div class="slds-var-m-bottom_medium slds-float_right custom-text">
+        <p>Confirm booking for:</p>
+        <p>Date: {bookingDate}</p>
+        <p>Floor: {floorName}</p>
+        <p>Room: {roomName}</p>
+        <p>Time Slot: {timeSlot}</p>
+      </div>
+
+      <div class="slds-grid_align-center">
+        <div class="slds-col content-section">
+          <lightning-layout>
+            <lightning-layout-item padding="around-small" size="6">
+              <div class="slds-var-p-around_medium">
+                <lightning-input
+                  label="Selected Date"
+                  value={bookingDate}
+                  disabled
+                ></lightning-input>
+
+                <lightning-input
+                  label="Floor Name"
+                  value={floorName}
+                  disabled
+                ></lightning-input>
+                <lightning-input
+                  label="Room Name"
+                  value={roomName}
+                  disabled
+                ></lightning-input>
+
+                <lightning-input
+                  label="Time Slot"
+                  value={timeSlot}
+                  disabled
+                ></lightning-input>
+
+                <lightning-input
+                  label="Name"
+                  name="name"
+                  value={name}
+                  required="true"
+                  onchange={handleInputChange}
+                ></lightning-input>
+                <lightning-input
+                  label="Phone"
+                  name="phone"
+                  value={phone}
+                  required="true"
+                  onchange={handleInputChange}
+                ></lightning-input>
+                <lightning-input
+                  label="Email"
+                  type="Email"
+                  required="true"
+                  value={userEmail}
+                ></lightning-input>
+                <lightning-input
+                  label="Address"
+                  name="address"
+                  required="true"
+                  value={address}
+                  onchange={handleInputChange}
+                ></lightning-input>
+              </div>
+
+              <!-- Navigation Buttons -->
+              <lightning-layout-item
+                size="12"
+                padding="around-small"
+                class="slds-align_absolute-center"
+              >
+                <!-- Back Button -->
+                <lightning-button
+                  icon-name="utility:chevronleft"
+                  label="Back"
+                  variant="brand-outline"
+                  onclick={handlePreviousPage3}
+                >
+                </lightning-button>
+                <!-- Save Button -->
+                <lightning-button
+                  icon-position="right"
+                  icon-name="utility:chevronright"
+                  variant="brand-outline"
+                  label="Submit"
+                  title="Submit"
+                  onclick={handleSubmit}
+                  disabled={isBookButtonDisabled}
+                >
+                </lightning-button>
+              </lightning-layout-item>
+            </lightning-layout-item>
+          </lightning-layout>
+        </div>
+      </div>
+    </template>
+    <template if:true={bookingSuccess}>
+      <div class="success-message">Room booked successfully!</div>
+    </template>
+  </lightning-card>
+</template>

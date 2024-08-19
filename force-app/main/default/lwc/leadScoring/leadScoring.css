@@ -1,0 +1,17 @@
+.score-red {
+  color: red;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.score-orange {
+  color: orange;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.score-green {
+  color: green;
+  font-size: 40px;
+  font-weight: bold;
+}

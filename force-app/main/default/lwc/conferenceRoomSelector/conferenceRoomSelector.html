@@ -1,0 +1,33 @@
+<template>
+  <template if:true={conferenceRooms}>
+    <template for:each={conferenceRooms} for:item="room">
+      <div key={room.Id}>
+        <h3>{room.Name}</h3>
+        <template for:each={timeSlots} for:item="slot">
+          <template if:true={room.TimeSlots.slot}>
+            <lightning-button
+              key={slot}
+              data-room={room.Id}
+              data-slot={slot}
+              onclick={handleTimeSlotClick}
+              label={slot}
+              class="slds-button slds-button_neutral slds-button_destructive"
+            >
+            </lightning-button>
+          </template>
+          <template if:false={room.TimeSlots.slot}>
+            <lightning-button
+              key={slot}
+              data-room={room.Id}
+              data-slot={slot}
+              onclick={handleTimeSlotClick}
+              label={slot}
+              class="slds-button slds-button_neutral"
+            >
+            </lightning-button>
+          </template>
+        </template>
+      </div>
+    </template>
+  </template>
+</template>

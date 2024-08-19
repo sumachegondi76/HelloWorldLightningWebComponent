@@ -1,0 +1,21 @@
+<template>
+  <lightning-card title="Display Full Name" icon-name="employee">
+    <div class="slds-var-p-around_small">
+      <lightning-input
+        label="Enter First Name"
+        name="firstname"
+        onchange={changeHandler}
+        placehlder="Enter first name"
+        value={FirstName}
+      ></lightning-input>
+      <lightning-input
+        label="Enter Last Name"
+        name="lastname"
+        onchange={changeHandler}
+        placehlder="Enter last name"
+        value={LastName}
+      ></lightning-input>
+      <div>Full Name : {FullName}</div>
+    </div>
+  </lightning-card>
+</template>

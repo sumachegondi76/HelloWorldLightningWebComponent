@@ -1,0 +1,21 @@
+<template>
+    {searchTextChild2}
+    {currentId}
+    {currentName}
+    <div style="height:300px">
+        <template if:true={accountRecords.data}>
+    <lightning-datatable
+        key-field=""
+        data={accountRecords.data}
+        columns={columns}
+        hide-checkbox-column="true"
+        show-row-number-column="true"
+        onrowaction ={handleRowAction}
+        >
+</lightning-datatable>
+</template>
+<template if:false={accountRecords.error}>
+    Error loading data
+</template>
+</div>
+</template>

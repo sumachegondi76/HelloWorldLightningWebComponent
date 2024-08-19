@@ -1,0 +1,12 @@
+<template>
+    <lightning-card title="wire using apex">
+        <template if:true={accounts.data}>
+            <template for:each={accounts.data} for:item="acc">
+                <div key ={acc.id}>
+               <div>Name: {acc.Name}</div>
+                <div>Phone: {acc.Phone}</div>
+            </div>
+            </template>
+        </template>
+    </lightning-card>
+</template>

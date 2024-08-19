@@ -1,0 +1,266 @@
+<template>
+  <template if:true={showPhoto}>
+    <c-conference-room-photo
+      onnavigate={handleNavigation}
+      onuserlogin={handleUserLogin}
+    ></c-conference-room-photo>
+  </template>
+
+  <template if:false={showPhoto}>
+    <lightning-card>
+      <h1 class="card-title">Conference Room Booking</h1>
+
+      <!-- Spinner -->
+      <lightning-spinner
+        class="slds-is-fixed"
+        variant="brand"
+        alternative-text="Please wait while loading"
+        if:true={showSpinner}
+      ></lightning-spinner>
+
+      <c-conference-logo></c-conference-logo>
+
+      <!-- Progress Indicator -->
+      <lightning-layout multiple-rows="true">
+        <lightning-layout-item size="12" padding="around-small">
+          <lightning-progress-indicator
+            current-step={currentStep}
+            type="path"
+            variant="base"
+          >
+            <template for:each={steps} for:item="step">
+              <lightning-progress-step
+                label={step.label}
+                value={step.value}
+                key={step.value}
+              ></lightning-progress-step>
+            </template>
+          </lightning-progress-indicator>
+        </lightning-layout-item>
+      </lightning-layout>
+
+      <!-- First Page -->
+      <template if:true={showFirstPage}>
+        <lightning-layout multiple-rows="true">
+          <!-- Date Column -->
+          <lightning-layout-item size="8" padding="around-small">
+            <lightning-input
+              type="date"
+              label="Select Date"
+              required="true"
+              placeholder="Select Date"
+              value={selectedDate}
+              id="dateInput"
+              onchange={handleDateChange}
+            ></lightning-input>
+            <lightning-layout>
+              <lightning-layout-item size="12" padding="around-small">
+                <template if:true={showGetFloorsButton}>
+                  <lightning-button
+                    class="slds-float_right"
+                    variant="brand-outline"
+                    label="Get Floors"
+                    onclick={handleGetFloors}
+                  ></lightning-button>
+                </template>
+                <lightning-button
+                  label="Back"
+                  class="slds-float_left"
+                  icon-name="utility:back"
+                  variant="neutral"
+                  onclick={handleBackToPhoto}
+                ></lightning-button>
+              </lightning-layout-item>
+            </lightning-layout>
+            <template if:true={showFloors}>
+              <div class="floor-container">
+                <template if:true={showSelectFloorText}>
+                  <h1 class="card-title1">Select Floor</h1>
+                </template>
+
+                <template for:each={floorOptions} for:item="floor">
+                  <div
+                    key={floor.value}
+                    data-floor-id={floor.value}
+                    data-floor-name={floor.label}
+                    onclick={handleFloorClick}
+                    class="floor-tile"
+                  >
+                    <div class="floor-image-container">
+                      <img
+                        src={floor.image}
+                        alt={floor.label}
+                        class="floor-image"
+                      />
+                    </div>
+                    <div class="floor-label">{floor.label}</div>
+                    <template if:true={showSelectRoomButton}>
+                      <div class="select-room-button-container">
+                        <button
+                          class="custom-select-button"
+                          onclick={handleSelectConferenceRooms}
+                        >
+                          Select
+                        </button>
+                      </div>
+                    </template>
+                  </div>
+                </template>
+              </div>
+            </template>
+            <template if:true={showSeatStatuses}>
+              <lightning-layout>
+                <lightning-layout-item
+                  class="slds-align_absolute-center"
+                  padding="around-small"
+                  size="3"
+                >
+                  <button name="Available" class={seatAvailableClass}>
+                    <b>A</b>
+                  </button>
+                  &nbsp;- AVAILABLE
+                </lightning-layout-item>
+                <lightning-layout-item
+                  class="slds-align_absolute-center"
+                  padding="around-small"
+                  size="3"
+                >
+                  <button name="Selected" class={seatSelectedClass}>S</button>
+                  &nbsp;- SELECTED
+                </lightning-layout-item>
+                <lightning-layout-item
+                  class="slds-align_absolute-center"
+                  padding="around-small"
+                  size="3"
+                >
+                  <button name="Booked" class={seatBookedClass}>B</button>
+                  &nbsp;- BOOKED
+                </lightning-layout-item>
+              </lightning-layout>
+            </template>
+          </lightning-layout-item>
+
+          <!-- Bookings Section -->
+          <lightning-layout-item size="4" padding="around-small">
+            <template if:true={previousBookings.length}>
+              <div class="bookings-section">
+                <h2>Previous Bookings</h2>
+                <template for:each={previousBookings} for:item="booking">
+                  <div key={booking.Id} class="slds-p-around_small">
+                    <p><strong>Floor:</strong> {booking.Floor__r.Name}</p>
+                    <p>
+                      <strong>Room:</strong> {booking.Conference_Room__r.Name}
+                    </p>
+                    <p><strong>Date:</strong> {booking.Date__c}</p>
+                    <p><strong>Time Slot:</strong> {booking.Time_Slot__c}</p>
+                    <template if:true={booking.showCancelButton}>
+                      <lightning-button
+                        label="Cancel Booking"
+                        variant="destructive"
+                        data-booking-id={booking.Id}
+                        onclick={handleCancelBooking}
+                      ></lightning-button>
+                    </template>
+                  </div>
+                </template>
+              </div>
+            </template>
+          </lightning-layout-item>
+        </lightning-layout>
+        <template if:true={showCancelModal}>
+          <section
+            role="dialog"
+            tabindex="-1"
+            class="slds-modal slds-fade-in-open"
+          >
+            <div class="slds-modal__container">
+              <!-- Modal/Popup Header -->
+              <header class="slds-modal__header">
+                <button
+                  class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                  title="Close"
+                  onclick={closeCancelModal}
+                >
+                  <lightning-icon
+                    icon-name="utility:close"
+                    alternative-text="close"
+                    size="small"
+                  ></lightning-icon>
+                  <span class="slds-assistive-text">Close</span>
+                </button>
+                <h2 class="slds-text-heading_medium">Cancel Booking</h2>
+              </header>
+
+              <!-- Modal/Popup Body -->
+              <div class="slds-modal__content slds-p-around_medium">
+                <p>Are you sure you want to cancel this booking?</p>
+              </div>
+
+              <!-- Modal/Popup Footer -->
+              <footer class="slds-modal__footer">
+                <button
+                  class="slds-button slds-button_neutral"
+                  onclick={closeCancelModal}
+                >
+                  No
+                </button>
+                <button
+                  class="slds-button slds-button_brand"
+                  onclick={confirmCancelBooking}
+                >
+                  Yes
+                </button>
+              </footer>
+            </div>
+          </section>
+          <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+        <template if:true={errorMessage}>
+          <div class="error-message">{errorMessage}</div>
+        </template>
+      </template>
+
+      <!-- Second Page -->
+      <template if:true={showSecondPage}>
+        <c-conference-rooms
+          floor-id={selectedFloorId}
+          floor-name={selectedFloorName}
+          room-name={selectedRoomName}
+          booking-date={selectedDate}
+          onroomselect={handleRoomSelection}
+          ontimeslotselect={handleTimeSlotSelection}
+          onpreviouspage={handlePreviousPage2}
+          onselectbookingform={handleSelectBookingForm}
+          room-id={selectedRoomId}
+          onallroomsbooked={checkAndHighlightFloors}
+        ></c-conference-rooms>
+      </template>
+
+      <!-- Third Page -->
+      <template if:true={showThirdPage}>
+        <c-booking-form
+          floor-id={selectedFloorId}
+          booking-date={selectedDate}
+          room-name={selectedRoomName}
+          floor-name={selectedFloorName}
+          room-id={selectedRoomId}
+          time-slot={selectedTimeSlot}
+          user-email={registeredEmail}
+          onpreviouspage1={handlePreviousPage3}
+          onsubmitbooking={handleSubmitBooking}
+        ></c-booking-form>
+      </template>
+
+      <!-- Fourth Page -->
+      <template if:true={showFourthPage}>
+        <div class="confirmation-message">
+          Your booking has been successfully submitted.
+        </div>
+        <lightning-button
+          label="Back to Home"
+          onclick={handleBackToHome}
+        ></lightning-button>
+      </template>
+    </lightning-card>
+  </template>
+</template>

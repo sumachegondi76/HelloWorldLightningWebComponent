@@ -1,0 +1,68 @@
+<template>
+    <lightning-card title="Case Details">
+        <lightning-datatable data={lstdata} columns={columns} key-field="Id"
+            onrowaction={handleRowAction}></lightning-datatable>
+        <!-- Detail view modal -->
+        <template if:true={bShowModal}>
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <!-- modal header -->
+                    <header class="slds-modal__header">
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                            title="Close" onclick={closeModal}>
+                            <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse"
+                                size="small"></lightning-icon>
+                        </button>
+
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate" if:true={isviewForm}>
+                            Account Record</h2>
+                        <h2 id="modal-heading-02" class="slds-text-heading_medium slds-hyphenate" if:true={conForm}>
+                            Contact Record</h2>
+                    </header>
+
+                    <!--  record view form -->
+                    <div if:true={isviewForm} class="slds-theme_default">
+                        <lightning-record-view-form layout-type="Full" record-id={accRecordId} object-api-name="Account">
+                            <div class="slds-grid slds-wrap">
+
+                           <div class="slds-col slds-size_1-of-2">
+                            <lightning-output-field field-name="Name"></lightning-output-field></div>
+                            <div class="slds-col slds-size_1-of-2">
+                            <lightning-output-field field-name="Industry"></lightning-output-field></div>
+                            <lightning-output-field field-name="Phone"></lightning-output-field><br />
+                            </div>
+                            <footer class="slds-modal__footer" if:true={isviewForm}>
+                                <lightning-button variant="brand" label="Close" title="Close"
+                                    onclick={closeModal}></lightning-button>
+                                    
+                            </footer>
+                        </lightning-record-view-form><br />
+
+                    </div>
+                    <!--Checking the Contact record-->
+                    <!--  record view form -->
+
+                    <div if:true={conForm} class="slds-theme_default">
+                        <lightning-record-view-form layout-type="Full" record-id={conRecordId} object-api-name="Contact">
+                            <lightning-output-field field-name="Name"></lightning-output-field>
+                            <lightning-output-field field-name="Email"></lightning-output-field>
+                        <lightning-output-field field-name="Phone"></lightning-output-field><br />
+                        <lightning-output-field field-name="Title"></lightning-output-field><br /> 
+                        </lightning-record-view-form><br />
+
+                    </div>
+
+                    <!-- modal footer -->
+                    <footer class="slds-modal__footer" if:true={conForm}>
+                        <lightning-button variant="brand" label="Close" title="Close"
+                            onclick={closeModal}></lightning-button>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+
+        </template>
+    </lightning-card>
+
+</template>

@@ -1,0 +1,48 @@
+/* .title-container {
+  display: flex;
+  justify-content: center; /* Center the title container */
+/* margin-bottom: 20px; /* Adds space between the title and form */
+/* }   */
+
+.card-title {
+  color: #0e5a8a;
+  font-size: 24px; /* Adjust size as needed */
+  font-weight: bold;
+  margin-left: 400px; /* Adjust this value to move the title slightly to the left */
+}
+.slds-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 2rem;
+}
+.slds-var-p-around_medium {
+  background-color: aliceblue;
+  padding: 20px 30px 20px 30px;
+  margin: 0.5rem;
+  box-shadow: 0 0 10px #ccc;
+}
+
+.slds-grid.slds-grid_align-spread {
+  justify-content: space-around;
+}
+.slds-grid.slds-grid_align-spread > .slds-col {
+  margin-top: 1rem;
+  align-items: center;
+}
+.content-section {
+  order: 1;
+}
+.custom-text {
+  font-weight: bold;
+  font-size: 1.25rem; /* Adjust the size as needed */
+  padding-right: 40px; /* Adjust this value to fine-tune the alignment */
+}
+/* .button-section {
+  display: flex;
+  margin-left: 10px;
+  align-items: center;
+  order: 2;
+  /* Adjust this value to align the buttons */
+/* margin-top: 20px; /* Add some space between the form and buttons */
+/* } */

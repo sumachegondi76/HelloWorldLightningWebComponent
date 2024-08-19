@@ -1,0 +1,10 @@
+<template>
+
+    <ul>
+    <template for:each={meetingRoomInfo} for:item="room">
+         <li key={room.roomName} style="padding:10px"> 
+            <c-meeting-room meeting-room-info={room}  show-room-property></c-meeting-room>
+         </li>
+    </template>
+</ul>
+</template>

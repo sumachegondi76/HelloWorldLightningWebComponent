@@ -1,0 +1,11 @@
+<!-- sldsValidatorIgnore -->
+<!-- sldsValidatorIgnore -->
+<template>
+  <template if:true={floors}>
+    <template for:each={floors} for:item="floor">
+      <button key={floor.Id} data-id={floor.Id} onclick={handleFloorClick}>
+        {floor.Name}
+      </button>
+    </template>
+  </template>
+</template>

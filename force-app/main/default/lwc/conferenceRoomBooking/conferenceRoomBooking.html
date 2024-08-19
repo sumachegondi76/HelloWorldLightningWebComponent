@@ -1,0 +1,57 @@
+<template>
+  <lightning-card title="Conference Room Booking">
+    <div class="slds-p-horizontal--small">
+      <template for:each={floorOptions} for:item="floor">
+        <lightning-button
+          key={floor.value}
+          label={floor.label}
+          data-id={floor.value}
+          onclick={handleFloorClick}
+          class="slds-m-around_x-small"
+        ></lightning-button>
+      </template>
+    </div>
+
+    <template if:true={selectedFloor}>
+      <template for:each={conferenceRooms} for:item="room">
+        <!-- <p key={room.Id}>{room.Name}</p> -->
+        <lightning-card key={room.Id} title={room.Name}>
+          <div class="slds-p-horizontal_small">
+            <lightning-layout vertical-align="start">
+              <lightning-layout-item size="8">
+                <lightning-input
+                  type="date"
+                  label="Select Date"
+                  onchange={handleDateChange}
+                ></lightning-input>
+                <lightning-combobox
+                  name="timeSlot"
+                  label="Select Time Slot"
+                  value={selectedTimeSlot}
+                  placeholder="Select a Time Slot"
+                  options={timeSlotOptions}
+                  onchange={handleTimeSlotChange}
+                ></lightning-combobox>
+                <lightning-button
+                  label="Check Availability"
+                  data-id={room.Id}
+                  onclick={checkAvailability}
+                ></lightning-button>
+                <template if:true={availabilityMap.room.Id}>
+                  <p>{availabilityMap.room.Id}</p>
+                </template>
+                <template if:true={availabilityMap.room.Id}>
+                  <lightning-button
+                    label="Book Room"
+                    data-id={room.Id}
+                    onclick={bookRoom}
+                  ></lightning-button>
+                </template>
+              </lightning-layout-item>
+            </lightning-layout>
+          </div>
+        </lightning-card>
+      </template>
+    </template>
+  </lightning-card>
+</template>

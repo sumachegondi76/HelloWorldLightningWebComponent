@@ -1,0 +1,32 @@
+<template>
+  <lightning-card title="Conference Hall Booking System">
+    <div class="slds-p-around_medium">
+      <c-conf-booking ondatechange={handleDateChange}></c-conf-booking>
+      <lightning-button
+        label="Go to Floors"
+        onclick={showFloors}
+      ></lightning-button>
+    </div>
+
+    <template if:true={showFloorsSection}>
+      <c-floor-selector onfloorchange={handleFloorChange}></c-floor-selector>
+    </template>
+
+    <template if:true={showRoomsSection}>
+      <c-conference-room-selector
+        floor-id={selectedFloorId}
+        selected-date={selectedDate}
+        onbooking={handleBooking}
+      ></c-conference-room-selector>
+    </template>
+
+    <template if:true={showBookingForm}>
+      <c-booking-form
+        room-id={selectedRoomId}
+        date={selectedDate}
+        time-slot={selectedTimeSlot}
+        onbooking={handleBookingComplete}
+      ></c-booking-form>
+    </template>
+  </lightning-card>
+</template>

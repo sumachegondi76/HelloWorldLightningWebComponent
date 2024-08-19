@@ -1,0 +1,15 @@
+<template>
+    <lightning-card title="Case Records">
+        <lightning-datatable
+            key-field="Id"
+            data={caseRecords}
+            columns={columns}
+            onrowaction={handleRowAction}>
+        </lightning-datatable>
+        <c-case-modal
+            record-id={selectedRecordId}
+            is-modal-visible={isModalVisible}
+            onclosemodal={handleModalClose}>
+        </c-case-modal>
+    </lightning-card>
+</template>

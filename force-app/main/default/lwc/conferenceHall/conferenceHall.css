@@ -1,0 +1,192 @@
+.card-title {
+  text-align: center;
+  font-size: 24px; /* Adjust size as needed */
+  font-weight: bold;
+  margin-top: 0;
+}
+.card-title1 {
+  text-align: center;
+  color: #0e5a8a;
+  font-size: 24px; /* Adjust size as needed */
+  font-weight: bold;
+}
+.lightning-card {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.lightning-input {
+  margin-bottom: 1rem;
+}
+
+.floor-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+}
+
+.floor-tile {
+  border: 1px solid #d8dde6;
+  padding: 0.5rem;
+  margin: 0.5rem 0;
+  width: 50%;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 1rem;
+  border-radius: 1rem;
+  position: relative;
+}
+.select-room-button-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.custom-select-button {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 4px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.custom-select-button:hover {
+  opacity: 0.8;
+}
+
+.selected-floor {
+  background-color: #4caf50; /* Green color for selected floor */
+  color: white; /* Text color for selected floor */
+}
+.selected-floor ~ .select-room-button-container {
+  display: block; /* Show button only for the sibling of the selected floor */
+}
+
+.floor-tile:not(.selected-floor) .select-room-button-container {
+  display: none; /* Hide buttons for all other floors */
+}
+.error-message {
+  color: red;
+  margin-bottom: 1rem;
+}
+
+.confirmation-message {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+.floor-image-container {
+  width: 100%;
+  height: 150px; /* Adjust height as per your design */
+  overflow: hidden;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  position: relative;
+  transition: transform 0.3s ease;
+}
+.floor-image-container:hover {
+  transform: scale(1); /* Scale up on hover */
+}
+.floor-image-container:hover .select-room-button-container {
+  opacity: 1; /* Show button on hover */
+}
+.floor-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures the image covers the container */
+}
+
+.floor-label {
+  margin-top: 5px;
+  text-align: center;
+}
+
+.slds-is-fixed {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.floor-all-booked {
+  background-color: red;
+  color: white;
+  cursor: not-allowed;
+  /* pointer-events: none;  */
+  /* opacity: 0.5; */
+}
+.seatButtonAvailableStyle {
+  width: 10px;
+  color: #00008b;
+  border-color: #00008b;
+}
+.seatButtonSelectedStyle {
+  width: 10px;
+  background-color: green;
+  color: white;
+}
+.seatButtonBookedStyle {
+  width: 10px;
+  background-color: red;
+  color: white;
+}
+.bookings-section {
+  border: 1px solid #d8dde6;
+  border-radius: 4px;
+  padding: 1rem;
+  background-color: #f4f6f9;
+}
+
+.bookings-section h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #16325c;
+}
+
+.bookings-section p {
+  margin: 0.5rem 0;
+}
+.slds-modal__container {
+  width: 50%;
+  max-width: 40rem;
+}
+
+.slds-backdrop {
+  z-index: 1000;
+}
+
+.slds-modal {
+  z-index: 1001;
+}
+
+/* .booked {
+  background-color: red;
+  color: white; 
+} */
+/* .timeslot-tile.all-booked {
+  background-color: red; /* Adjust color as needed */
+/* }
+.timeslot-tile.all-booked-floor {
+  background-color: red; 
+}  */
+/* .booked {
+  background-color: red;
+}
+
+.all-booked {
+  background-color: red;
+}
+
+.floor-all-booked {
+  background-color: red;
+}
+.all-rooms-booked {
+  background-color: red;
+} */

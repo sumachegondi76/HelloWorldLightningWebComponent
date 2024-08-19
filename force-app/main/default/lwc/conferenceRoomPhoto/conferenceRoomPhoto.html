@@ -1,0 +1,219 @@
+<template>
+  <lightning-card>
+    <template if:true={showLoginForm}>
+      <h1 class="card-title">SignUp or Login to Book a Conference Room</h1>
+    </template>
+    <div class="forms-container">
+      <!-- Login Form -->
+      <template if:true={showLoginForm}>
+        <div class="form-container login-form-container">
+          <h2 class="form-title">Login</h2>
+          <!-- Title for Login Form -->
+          <div class="center-container">
+            <lightning-input
+              type="email"
+              label="Email"
+              value={loginEmail}
+              onchange={handleInputChange}
+              data-id="loginEmail"
+              required
+              class="centered-input"
+            ></lightning-input>
+          </div>
+          <div class="center-container">
+            <div class="password-container1">
+              <lightning-input
+                type={loginPasswordType}
+                label="Password"
+                value={loginPassword}
+                onchange={handleInputChange}
+                data-id="loginPassword"
+                required
+                class="centered-input"
+              ></lightning-input>
+              <lightning-icon
+                icon-name={loginEyeIcon}
+                onclick={toggleLoginPasswordVisibility}
+                class="eye-icon"
+              ></lightning-icon>
+            </div>
+          </div>
+          <div class="center-container">
+            <a href="#" onclick={handleForgotPassword}> Forgot Password? </a>
+          </div>
+          <div class="button-container">
+            <lightning-button
+              variant="brand"
+              label="Login"
+              onclick={login}
+              class="slds-m-top_medium"
+            ></lightning-button>
+            <lightning-button
+              variant="neutral"
+              label="Sign Up"
+              onclick={showRegistrationFormHandler}
+              class="slds-m-top_medium"
+            ></lightning-button>
+          </div>
+        </div>
+      </template>
+
+      <!-- Registration Form -->
+      <template if:true={showRegistrationForm}>
+        <div class="form-container">
+          <h2 class="form-title">Sign Up</h2>
+          <!-- Title for Registration Form -->
+          <lightning-input
+            type="text"
+            label="First Name"
+            value={firstName}
+            onchange={handleInputChange}
+            data-id="firstName"
+            required
+          ></lightning-input>
+          <lightning-input
+            type="text"
+            label="Last Name"
+            value={lastName}
+            onchange={handleInputChange}
+            data-id="lastName"
+            required
+          ></lightning-input>
+          <lightning-input
+            type="email"
+            label="Email"
+            value={email}
+            onchange={handleInputChange}
+            data-id="email"
+            required
+          ></lightning-input>
+          <div class="password-container">
+            <lightning-input
+              type={passwordType}
+              label="Create Password"
+              value={password}
+              onchange={handleInputChange}
+              data-id="password"
+              required
+            ></lightning-input>
+            <lightning-icon
+              icon-name={eyeIcon}
+              onclick={togglePasswordVisibility}
+              class="eye-icon"
+            ></lightning-icon>
+          </div>
+          <div class="password-container">
+            <lightning-input
+              type={confirmPasswordType}
+              label="Confirm Password"
+              value={confirmPassword}
+              onchange={handleInputChange}
+              data-id="confirmPassword"
+              required
+            ></lightning-input>
+            <lightning-icon
+              icon-name={confirmEyeIcon}
+              onclick={toggleConfirmPasswordVisibility}
+              class="eye-icon"
+            ></lightning-icon>
+          </div>
+          <template if:true={passwordError}>
+            <p class="error-text">{passwordError}</p>
+          </template>
+          <template if:true={passwordSuccess}>
+            <p class="success-text">{passwordSuccess}</p>
+          </template>
+          <div class="button-container">
+            <lightning-button
+              variant="brand"
+              label="Sign Up"
+              onclick={register}
+              class="slds-m-top_medium"
+            ></lightning-button>
+            <lightning-button
+              variant="neutral"
+              label="Back to Login"
+              onclick={showLoginFormHandler}
+              class="slds-m-top_medium"
+            ></lightning-button>
+          </div>
+        </div>
+      </template>
+
+      <!-- Password Reset Form -->
+      <template if:true={showResetPasswordForm}>
+        <div class="form-container">
+          <h2 class="form-title">Reset Your Password</h2>
+          <!-- Title for Password Reset Form -->
+          <lightning-input
+            type="email"
+            label="Enter your email address"
+            value={resetEmail}
+            onchange={handleEmailChange}
+            data-id="email"
+          ></lightning-input>
+          <div class="password-container">
+            <lightning-input
+              type="password"
+              label="New Password"
+              value={newPassword}
+              onchange={handleNewPasswordChange}
+              data-id="newPassword"
+              required
+            ></lightning-input>
+            <lightning-icon
+              icon-name="utility:hide"
+              onclick={togglePasswordVisibility}
+              class="eye-icon"
+            ></lightning-icon>
+          </div>
+          <div class="password-container">
+            <lightning-input
+              type="password"
+              label="Confirm New Password"
+              value={confirmNewPassword}
+              onchange={handleConfirmNewPasswordChange}
+              data-id="confirmNewPassword"
+              required
+            ></lightning-input>
+            <lightning-icon
+              icon-name="utility:hide"
+              onclick={togglePasswordVisibility}
+              class="eye-icon"
+            ></lightning-icon>
+          </div>
+          <template if:true={passwordError}>
+            <p class="error-text">{passwordError}</p>
+          </template>
+          <template if:true={passwordSuccess}>
+            <p class="success-text">{passwordSuccess}</p>
+          </template>
+          <div class="button-container">
+            <lightning-button
+              variant="brand"
+              label="Reset Password"
+              onclick={handleResetPassword}
+              class="slds-m-top_medium"
+            ></lightning-button>
+            <lightning-button
+              variant="neutral"
+              label="Back to Login"
+              onclick={showLoginFormHandler}
+              class="slds-m-top_medium"
+            ></lightning-button>
+          </div>
+        </div>
+      </template>
+    </div>
+
+    <!-- Photo container if authenticated -->
+    <template if:true={isAuthenticated}>
+      <div class="photo-container" ondblclick={navigateToBooking}>
+        <h2 class="photo-title">Conference Room Photo</h2>
+        <!-- Title for Photo Section -->
+        <img src={conferenceRoomPhotoUrl} alt="Conference Room" />
+        <div class="hover-message">Double Click</div>
+      </div>
+    </template>
+  </lightning-card>
+</template>
